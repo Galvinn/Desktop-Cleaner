@@ -70,39 +70,48 @@ class MoverHandler(FileSystemEventHandler):
         with scandir(source_dir) as entries:
             for entry in entries:
                 name = entry.name
-                self.check_audio_files(entry, name)
-                self.check_video_files(entry, name)
-                self.check_image_files(entry, name)
-                self.check_document_files(entry, name)
+                check_audio_files(entry, name)
+                check_video_files(entry, name)
+                check_image_files(entry, name)
+                check_document_files(entry, name)
 
-    def check_audio_files(self, entry, name):  # * Checks all Audio Files
-        for audio_extension in audio_extensions:
-            if name.endswith(audio_extension) or name.endswith(audio_extension.upper()):
-                dest = dest_dir_music
-                move_file(dest, entry, name)
-                logging.info(f"Moved audio file: {name}")
+def check_audio_files(entry, name):  # * Checks all Audio Files
+    for audio_extension in audio_extensions:
+        if name.endswith(audio_extension) or name.endswith(audio_extension.upper()):
+            dest = dest_dir_music
+            move_file(dest, entry, name)
+            logging.info(f"Moved audio file: {name}")
 
-    def check_video_files(self, entry, name):  # * Checks all Video Files
-        for video_extension in video_extensions:
-            if name.endswith(video_extension) or name.endswith(video_extension.upper()):
-                move_file(dest_dir_video, entry, name)
-                logging.info(f"Moved video file: {name}")
+def check_video_files(entry, name):  # * Checks all Video Files
+    for video_extension in video_extensions:
+        if name.endswith(video_extension) or name.endswith(video_extension.upper()):
+            move_file(dest_dir_video, entry, name)
+            logging.info(f"Moved video file: {name}")
 
-    def check_image_files(self, entry, name):  # * Checks all Image Files
-        for image_extension in image_extensions:
-            if name.endswith(image_extension) or name.endswith(image_extension.upper()):
-                move_file(dest_dir_image, entry, name)
-                logging.info(f"Moved image file: {name}")
+def check_image_files(entry, name):  # * Checks all Image Files
+    for image_extension in image_extensions:
+        if name.endswith(image_extension) or name.endswith(image_extension.upper()):
+            move_file(dest_dir_image, entry, name)
+            logging.info(f"Moved image file: {name}")
 
-    def check_document_files(self, entry, name):  # * Checks all Document Files
-        for documents_extension in document_extensions:
-            if name.endswith(documents_extension) or name.endswith(documents_extension.upper()):
-                move_file(dest_dir_documents, entry, name)
-                logging.info(f"Moved document file: {name}")
+def check_document_files(entry, name):  # * Checks all Document Files
+    for documents_extension in document_extensions:
+        if name.endswith(documents_extension) or name.endswith(documents_extension.upper()):
+            move_file(dest_dir_documents, entry, name)
+            logging.info(f"Moved document file: {name}")
 
+def main():
+     with scandir(source_dir) as entries:
+            for entry in entries:
+                name = entry.name
+                check_audio_files(entry, name)
+                check_video_files(entry, name)
+                check_image_files(entry, name)
+                check_document_files(entry, name)
 
 # from watchdog doc sample example
 if __name__ == "__main__":
+    main()
     logging.basicConfig(level=logging.INFO,
                         format='%(asctime)s - %(message)s',
                         datefmt='%Y-%m-%d %H:%M:%S')
