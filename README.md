@@ -1,4 +1,4 @@
-# Desktop-Clearner
+# Desktop-Cleaner
 
 The app will automatically organize & move your downloads into folders based on file types. The app will automatically rename the file when encountering a duplication file or file with the same name.
 
